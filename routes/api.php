@@ -3,6 +3,8 @@
 use App\Infrastructure\Controllers\GetUserController;
 use App\Infrastructure\Controllers\IsEarlyAdopterUserController;
 use App\Infrastructure\Controllers\StatusController;
+use App\Infrastructure\Controllers\testController;
+use App\Infrastructure\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +27,19 @@ Route::get(
     StatusController::class
 );
 
-Route::get('user/{email}', IsEarlyAdopterUserController::class);
-Route::get('user/id/{userId}', GetUserController::class);
+Route::get(
+    '/user',
+    UserController::class
+);
+
+/*
+Route::get(
+    '/user/{email}',
+    IsEarlyAdopterUserController::class
+);
+*/
+
+Route::get(
+    '/user/{userId}',
+    GetUserController::class
+);
