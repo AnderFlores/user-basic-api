@@ -6,12 +6,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
-class GetUserController extends BaseController
+class UserController extends BaseController
 {
-    public function __invoke(string $userId): JsonResponse
+    public function __invoke(): JsonResponse
     {
         return response()->json([
-            'error' => "user does not exist"
+            'error' => "User id is required"
         ], Response::HTTP_BAD_REQUEST);
     }
 }
