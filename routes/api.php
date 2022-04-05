@@ -1,5 +1,6 @@
 <?php
 
+use App\Infrastructure\Controllers\GenericErrorController;
 use App\Infrastructure\Controllers\GetUserController;
 use App\Infrastructure\Controllers\IsEarlyAdopterUserController;
 use App\Infrastructure\Controllers\StatusController;
@@ -25,6 +26,11 @@ use Illuminate\Support\Facades\Route;
 Route::get(
     '/status',
     StatusController::class
+);
+
+Route::get(
+    '/users',
+    GenericErrorController::class
 );
 
 Route::get(
