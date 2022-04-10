@@ -29,7 +29,7 @@ Route::get(
 );
 
 Route::get(
-    '/users',
+    '/users/list',
     GenericErrorController::class
 );
 
@@ -38,12 +38,11 @@ Route::get(
     UserController::class
 );
 
-/*
+
 Route::get(
     '/user/{email}',
     IsEarlyAdopterUserController::class
 );
-*/
 
 Route::get(
     '/user/{userId}',
