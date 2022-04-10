@@ -35,17 +35,17 @@ Route::get(
 );
 
 Route::get(
-    '/user',
+    '/users',
     UserController::class
 );
 
 
 Route::get(
-    '/user/{email}',
+    '/users/{email}',
     IsEarlyAdopterUserController::class
 );
 
 Route::get(
-    '/user/{userId}',
+    '/users/{userId}',
     GetUserController::class
 );
