@@ -1,4 +1,4 @@
-name: unit_test_validation_added
+name: runTests
 on: [push]
 jobs:
     run-tests:
