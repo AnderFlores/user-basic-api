@@ -3,6 +3,7 @@
 use App\Infrastructure\Controllers\GenericErrorController;
 use App\Infrastructure\Controllers\GetUserController;
 use App\Infrastructure\Controllers\IsEarlyAdopterUserController;
+use App\Infrastructure\Controllers\GetUsersListController;
 use App\Infrastructure\Controllers\StatusController;
 use App\Infrastructure\Controllers\testController;
 use App\Infrastructure\Controllers\UserController;
@@ -30,21 +31,21 @@ Route::get(
 
 Route::get(
     '/users/list',
-    GenericErrorController::class
+    GetUsersListController::class
 );
 
 Route::get(
-    '/user',
+    '/users',
     UserController::class
 );
 
 
 Route::get(
-    '/user/{email}',
+    '/users/{email}',
     IsEarlyAdopterUserController::class
 );
 
 Route::get(
-    '/user/{userId}',
+    '/users/{userId}',
     GetUserController::class
 );
