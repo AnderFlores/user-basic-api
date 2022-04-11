@@ -12,7 +12,7 @@ class GetUserController extends BaseController
     {
 
         return response()->json([
-            'error' => "User does not exist"
+            'error' => "User not found"
         ], Response::HTTP_BAD_REQUEST);
     }
 }

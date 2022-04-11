@@ -5,6 +5,7 @@ namespace App\Infrastructure\Providers;
 use App\Application\UserDataSource\UserDataSource;
 use App\DataSource\Database\EloquentUserDataSource;
 use Illuminate\Support\ServiceProvider;
+use Tests\doubles\FakeUserDataSource;
 
 class AppServiceProvider extends ServiceProvider
 {

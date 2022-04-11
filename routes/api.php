@@ -40,10 +40,10 @@ Route::get(
 );
 
 
-Route::get(
-    '/users/{email}',
-    IsEarlyAdopterUserController::class
-);
+//Route::get(
+//    '/users/{email}',
+//    IsEarlyAdopterUserController::class
+//);
 
 Route::get(
     '/users/{userId}',
