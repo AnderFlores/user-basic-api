@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
-class ListUsersController extends BaseController
+class GetUsersListController extends BaseController
 {
     public function __invoke(): JsonResponse
     {
