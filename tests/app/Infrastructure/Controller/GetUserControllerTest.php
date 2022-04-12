@@ -39,7 +39,7 @@ class GetUserControllerTest extends TestCase
             ->andThrow(new Exception('User not found'));
 
         $response = $this->get('/api/users/999');
-
+        $this->expectException(Exception::class);
         $response->assertExactJson(['error' => 'User not found']);
 
     }
@@ -94,6 +94,10 @@ class GetUserControllerTest extends TestCase
 
         $response = $this->get('/api/users/list');
 
-        $response->assertStatus(Response::HTTP_OK)->assertExactJson(['list'=>array("")]);
+        $response->assertExactJson(['list'=>array(
+            'id1' => '1',
+            'id2' => '2',
+            'id3' => '3',
+        )]);
     }
 }
