@@ -8,12 +8,22 @@ use Illuminate\Routing\Controller as BaseController;
 
 class GetUsersListController extends BaseController
 {
+    private $getUserListService;
+    public function __construct(GetUserListService $getUserListService)
+    {
+        $this->getUserListService = $getUserListService;
+    }
     public function __invoke(): JsonResponse
     {
+        try {
+            $isEarlyAdopter = $this->getUserListService->execute();
+        } catch (Exception $exception) {
+            return response()->json([
+                'error' => $exception->getMessage()
+            ], Response::HTTP_BAD_REQUEST);
+        }
         return response()->json([
-            ['id' => "1"],
-            ['id' => "2"],
-            ['id' => "3"]
-        ], Response::HTTP_BAD_REQUEST);
+            'list' => $this->getUserListService
+        ], Response::HTTP_OK);
     }
 }

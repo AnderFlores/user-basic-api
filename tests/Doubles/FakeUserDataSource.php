@@ -7,6 +7,7 @@ use App\Domain\User;
 
 class FakeUserDataSource implements UserDataSource
 {
+    private $users;
     public function findByEmail(string $email): User
     {
         return new User(1, $email);
@@ -15,5 +16,15 @@ class FakeUserDataSource implements UserDataSource
     public function findById(string $id): User
     {
         return new User($id, "user@user.com");
+    }
+
+    public function setUserList(array $users)
+    {
+        $this->users = $users;
+    }
+
+    public function getUserList(): array
+    {
+        return $this->users;
     }
 }
