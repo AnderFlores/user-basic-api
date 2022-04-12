@@ -10,9 +10,15 @@ class GetUserController extends BaseController
 {
     public function __invoke(string $userId): JsonResponse
     {
-
-        return response()->json([
-            'error' => "User does not exist"
-        ], Response::HTTP_BAD_REQUEST);
+        if (true) {
+            return response()->json([
+                'id' => "1",
+                'email' => "user@user.com"
+            ], Response::HTTP_ACCEPTED);
+        } else {
+            return response()->json([
+                'error' => "User does not exist"
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 }

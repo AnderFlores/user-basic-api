@@ -31,6 +31,8 @@ class IsEarlyAdopterService
         $user = $this->userDataSource->findByEmail($email);
         $isEarlyAdopter = false;
 
+        echo $user->getId();
+        echo $user->getEmail();
         if ($user->getId() < 1000) {
             $isEarlyAdopter = true;
         }
