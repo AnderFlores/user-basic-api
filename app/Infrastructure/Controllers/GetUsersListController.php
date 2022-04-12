@@ -14,7 +14,6 @@ class GetUsersListController extends BaseController
     {
         $this->getUserListService = $getUserListService;
     }
-
     public function __invoke(): JsonResponse
     {
         try {

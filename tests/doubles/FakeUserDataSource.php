@@ -35,7 +35,7 @@ class FakeUserDataSource implements UserDataSource
         $this->users = $users;
     }
 
-    public function getUserList()
+    public function getUserList():array
     {
         return $this->users;
     }

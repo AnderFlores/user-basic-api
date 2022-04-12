@@ -11,16 +11,14 @@ class GetUserListService
      * @var UserDataSource
      */
     private $userDataSource;
-
     /**
-     * IsEarlyAdopterService constructor.
+     * GetUserListService constructor.
      * @param UserDataSource $userDataSource
      */
     public function __construct(UserDataSource $userDataSource)
     {
         $this->userDataSource = $userDataSource;
     }
-
     /**
      * @throws Exception
      */
