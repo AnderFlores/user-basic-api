@@ -13,8 +13,9 @@ use Tests\doubles\FakeUserDataSource;
 
 class GetUserListServiceTest extends TestCase
 {
-    private GetUserListService $getUserListService;
-    private FakeUserDataSource $fakeUserDataSource;
+    private $getUserListService;
+    private $userDataSource;
+
 
     /**
      * @setUp
@@ -22,8 +23,8 @@ class GetUserListServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->fakeUserDataSource = new FakeUserDataSource();
-        $this->getUserListService = new GetUserListService($this->fakeUserDataSource);
+        $this->userDataSource = Mockery::mock(UserDataSource::class);
+        $this->getUserListService = new GetUserListService($this->userDataSource);
     }
 
     /**
@@ -31,11 +32,20 @@ class GetUserListServiceTest extends TestCase
      */
     public function returnEmptyUserList()
     {
-        $this->fakeUserDataSource->setUserList(array(""));
+        $this->userDataSource
+            ->expects('setUserList')
+            ->with(array())
+            ->once()
+            ->andReturnNull();
 
-        $response = $this->fakeUserDataSource->getUserList();
+        $this->userDataSource
+            ->expects('getUserList')
+            ->with()
+            ->once()
+            ->andReturn(array());
 
-        $this->assertEquals(array(""), $response);
+       $response = $this->getUserListService->execute();
+       $this->assertEquals(array(), $response);
     }
 
     /**
@@ -45,10 +55,19 @@ class GetUserListServiceTest extends TestCase
     {
         $user1 = new User(1, "user1@users.com");
         $user2 = new User(2, "user2@users.com");
-        $this->fakeUserDataSource->setUserList(array($user1, $user2));
+        $this->userDataSource
+            ->expects('setUserList')
+            ->with(array($user1, $user2))
+            ->once()
+            ->andReturnNull();
 
-        $response = $this->fakeUserDataSource->getUserList();
+        $this->userDataSource
+            ->expects('getUserList')
+            ->with()
+            ->once()
+            ->andReturn(array($user1, $user2));
 
+        $response = $this->getUserListService->execute();
         $this->assertEquals(array($user1, $user2), $response);
     }
 }
