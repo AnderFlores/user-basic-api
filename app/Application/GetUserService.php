@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Application\GetUserList;
+namespace App\Application;
 
 use App\Application\UserDataSource\UserDataSource;
+use App\Domain\User;
 use Exception;
 
-class GetUserListService
+class GetUserService
 {
     /**
      * @var UserDataSource
      */
     private $userDataSource;
     /**
-     * GetUserListService constructor.
+     * GetUserService constructor.
      * @param UserDataSource $userDataSource
      */
     public function __construct(UserDataSource $userDataSource)
@@ -22,9 +23,14 @@ class GetUserListService
     /**
      * @throws Exception
      */
-    public function execute(): array
+    public function getList(): array
     {
         $userList = $this->userDataSource->getUserList();
         return $userList;
+    }
+    public function getUser(int $id): User
+    {
+        return $this->userDataSource->findById($id);
+
     }
 }

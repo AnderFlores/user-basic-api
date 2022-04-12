@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class GetUserListControllerTest extends TestCase
 {
-    private UserDataSource $userDataSource;
+    private  $userDataSource;
 
     /**
      * @setUp
@@ -22,7 +22,9 @@ class GetUserListControllerTest extends TestCase
         parent::setUp();
 
         $this->userDataSource = Mockery::mock(UserDataSource::class);
-        $this->app->bind(UserDataSource::class, fn () => $this->userDataSource);
+        $this->app->bind(UserDataSource::class, function () {
+            return $this->userDataSource;
+        });
     }
 
     /**

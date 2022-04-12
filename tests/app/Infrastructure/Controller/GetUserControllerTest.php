@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class GetUserControllerTest extends TestCase
 {
-    private UserDataSource $userDataSource;
+    private  $userDataSource;
 
     /**
      * @setUp
@@ -22,7 +22,9 @@ class GetUserControllerTest extends TestCase
         parent::setUp();
 
         $this->userDataSource = Mockery::mock(UserDataSource::class);
-        $this->app->bind(UserDataSource::class, fn () => $this->userDataSource);
+        $this->app->bind(UserDataSource::class, function () {
+            return $this->userDataSource;
+        });
     }
 
     /**
@@ -32,7 +34,7 @@ class GetUserControllerTest extends TestCase
     {
         $this->userDataSource
             ->expects('findById')
-            ->with('999')
+            ->with(999)
             ->once()
             ->andThrow(new Exception('User not found'));
 
@@ -47,17 +49,19 @@ class GetUserControllerTest extends TestCase
      */
     public function userWithGivenIdDoesExist()
     {
-        $email = 'user@user.com';
 
+        $email = 'user@user.com';
         $user = new User(1, $email);
-//        $this->userDataSource
-//            ->expects('findById')
-//            ->with('1')
-//            ->once()
-//            ->andReturn($user);
+
+
+        $this->userDataSource
+            ->expects('findById')
+            ->with(1)
+            ->once()
+            ->andReturn($user);
 
         $response = $this->get('/api/users/1');
 
-        $response->assertExactJson(['id' => '1', 'email' => $email]);
+        $response->assertExactJson(['id' => 1, 'email' => $email]);
     }
 }

@@ -11,7 +11,6 @@ class IsEarlyAdopterService
      * @var UserDataSource
      */
     private $userDataSource;
-
     /**
      * IsEarlyAdopterService constructor.
      * @param UserDataSource $userDataSource
@@ -20,7 +19,6 @@ class IsEarlyAdopterService
     {
         $this->userDataSource = $userDataSource;
     }
-
     /**
      * @param string $email
      * @return bool
@@ -30,11 +28,9 @@ class IsEarlyAdopterService
     {
         $user = $this->userDataSource->findByEmail($email);
         $isEarlyAdopter = false;
-
         if ($user->getId() < 1000) {
             $isEarlyAdopter = true;
         }
-
         return $isEarlyAdopter;
     }
 }

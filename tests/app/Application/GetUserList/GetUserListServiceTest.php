@@ -2,14 +2,11 @@
 
 namespace Tests\app\Application\GetUserList;
 
-use App\Application\EarlyAdopter\IsEarlyAdopterService;
-use App\Application\GetUserList\GetUserListService;
+use App\Application\GetUserService;
 use App\Application\UserDataSource\UserDataSource;
 use App\Domain\User;
-use Exception;
 use Mockery;
 use PHPUnit\Framework\TestCase;
-use Tests\doubles\FakeUserDataSource;
 
 class GetUserListServiceTest extends TestCase
 {
@@ -24,7 +21,7 @@ class GetUserListServiceTest extends TestCase
     {
         parent::setUp();
         $this->userDataSource = Mockery::mock(UserDataSource::class);
-        $this->getUserListService = new GetUserListService($this->userDataSource);
+        $this->getUserListService = new GetUserService($this->userDataSource);
     }
 
     /**

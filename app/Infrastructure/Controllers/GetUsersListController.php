@@ -2,22 +2,22 @@
 
 namespace App\Infrastructure\Controllers;
 
-use App\Application\GetUserList\GetUserListService;
+use App\Application\GetUserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
 class GetUsersListController extends BaseController
 {
-    private $getUserListService;
-    public function __construct(GetUserListService $getUserListService)
+    private $getUserService;
+    public function __construct(GetUserService $getUserListService)
     {
-        $this->getUserListService = $getUserListService;
+        $this->getUserService = $getUserListService;
     }
     public function __invoke(): JsonResponse
     {
         try {
-            $getUserListService = $this->getUserListService->execute();
+            $getUserService = $this->getUserService->getList();
         } catch (Exception $exception) {
             return response()->json([
                 'error' => $exception->getMessage()
@@ -25,7 +25,7 @@ class GetUsersListController extends BaseController
         }
 
         return response()->json([
-            'list' => $getUserListService
+            'list' => $getUserService
         ], Response::HTTP_OK);
     }
 }
