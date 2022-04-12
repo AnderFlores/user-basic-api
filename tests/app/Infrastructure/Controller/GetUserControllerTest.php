@@ -4,6 +4,7 @@ namespace Tests\app\Infrastructure\Controller;
 
 use App\Application\UserDataSource\UserDataSource;
 use App\Domain\User;
+use Tests\doubles\FakeUserDataSource;
 use Exception;
 use Illuminate\Http\Response;
 use Mockery;
@@ -32,12 +33,13 @@ class GetUserControllerTest extends TestCase
         $this->userDataSource
             ->expects('findById')
             ->with('999')
-            ->never()
+            ->once()
             ->andThrow(new Exception('User not found'));
 
-        $response = $this->get('/api/user/999');
+        $response = $this->get('/api/users/999');
 
-        $response->assertExactJson(['error' => 'User does not exist']);
+        $response->assertExactJson(['error' => 'User not found']);
+
     }
 
     /**
@@ -48,13 +50,13 @@ class GetUserControllerTest extends TestCase
         $email = 'user@user.com';
 
         $user = new User(1, $email);
-        $this->userDataSource
-            ->expects('findById')
-            ->with('1')
-            ->once()
-            ->andReturn($user);
+//        $this->userDataSource
+//            ->expects('findById')
+//            ->with('1')
+//            ->once()
+//            ->andReturn($user);
 
-        $response = $this->get('/api/user/1');
+        $response = $this->get('/api/users/1');
 
         $response->assertExactJson(['id' => '1', 'email' => $email]);
     }

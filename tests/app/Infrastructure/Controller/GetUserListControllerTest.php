@@ -49,11 +49,11 @@ class GetUserListControllerTest extends TestCase
             ->expects('getUserList')
             ->once()
             ->andReturn(
-                response()->json([
-                    'id1' => '1',
-                    'id2' => '2',
-                    'id3' => '3',
-                ], Response::HTTP_OK)
+                     response()->json([
+                     'id1' => '1',
+                     'id2' => '2',
+                     'id3' => '3',
+                     ], Response::HTTP_OK)
             );
 
         $response = $this->get('/api/users/list');
