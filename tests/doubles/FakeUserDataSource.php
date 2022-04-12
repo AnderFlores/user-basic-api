@@ -19,10 +19,10 @@ class FakeUserDataSource implements UserDataSource
         return new User(1, $email);
     }
 
-    public function findById(string $id):User
+    public function findById(int $id):User
     {
-        if ($id > 100){
-           return new User();
+        if ($id > 998){
+            throw new Exception('User not found');
         }
         else{
             return new User($id, "user@user.com");
