@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\app\Application\GetUserList;
+namespace Tests\app\Application;
 
 use App\Application\GetUserService;
 use App\Application\UserDataSource\UserDataSource;
@@ -8,9 +8,9 @@ use App\Domain\User;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
-class GetUserListServiceTest extends TestCase
+class GetUserServiceTest extends TestCase
 {
-    private $getUserListService;
+    private $getUserService;
     private $userDataSource;
 
 
@@ -21,7 +21,7 @@ class GetUserListServiceTest extends TestCase
     {
         parent::setUp();
         $this->userDataSource = Mockery::mock(UserDataSource::class);
-        $this->getUserListService = new GetUserService($this->userDataSource);
+        $this->getUserService = new GetUserService($this->userDataSource);
     }
 
     /**
@@ -41,7 +41,7 @@ class GetUserListServiceTest extends TestCase
             ->once()
             ->andReturn(array());
 
-       $response = $this->getUserListService->execute();
+       $response = $this->getUserService->getList();
        $this->assertEquals(array(), $response);
     }
 
@@ -64,7 +64,7 @@ class GetUserListServiceTest extends TestCase
             ->once()
             ->andReturn(array($user1, $user2));
 
-        $response = $this->getUserListService->execute();
+        $response = $this->getUserService->getList();
         $this->assertEquals(array($user1, $user2), $response);
     }
 }
